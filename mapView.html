@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Triangle | Solution</title>
+    <!-- Bootstrap style sheet -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font-awesome icons -->
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <!-- style-sheets -->
+    <link rel="stylesheet" href="style.css">
+    <!-- API Key Configurations -->
+    <script src="config.js"></script>
+
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="jumbotron" style="height:200px;">
+        <div class="container">
+            <h1 class="display-4">Restaurant Triangle</h1>
+            <p class="lead">Solution</p>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row mt-2 mb-2">
+            <div class="col-12 col-md-2">
+                <!-- button to navigate to previous page -->
+                <a class="btn btn-primary text-white" href="index.html"><i class="fa fa-chevron-circle-left"
+                        aria-hidden="true"></i> Go
+                    Back</a>
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="alert alert-info">
+                    <!-- Information -->
+                    <p class="font-weight-bold"><i class="fa fa-info-circle" aria-hidden="true"></i> This application
+                        uses Zomato API & BING Maps API and works when there is an authorized Zomato Partner at near by
+                        your location.</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- Card -->
+        <div class="card card-body">
+            <!-- Tab Navigation -->
+            <ul class="nav nav-tabs" role="tablist">
+                <!-- Tabs -->
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#showHome" role="tab" data-toggle="tab">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#task1" onclick="task1()" role="tab" data-toggle="tab">Task 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#task2" role="tab" onclick="task2()" data-toggle="tab">Task 2</a>
+                </li>
+
+            </ul>
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <div id="showHome" role="tabpanel" class="tab-pane active">
+                    <!-- Welcome Heading -->
+                    <div class="text-center">
+                        <p class="display-4">WELCOME TO RESTAURANT TRIANGLE</p>
+                    </div>
+                    <!-- Buttons to get sort -->
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-12 col-md-3">
+                            <a class="btn btn-primary text-white" onclick="getRestaurantsNearMe()">Search for
+                                restaurants near
+                                me</a>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <button class="btn btn-primary text-white" id="getNearFarRestBtnWalk" disabled
+                                onclick="getNearAndFarRestWalk()">Get Near and Far
+                                Restaurants in
+                                Map(Walk)</button>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <button class="btn btn-primary text-white" id="getNearFarRestBtn" disabled
+                                onclick="getNearAndFarRest()">Get Near and Far
+                                Restaurants in
+                                Map(drive)</button>
+                        </div>
+                    </div>
+                    <!-- Map to display restaurants near you -->
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-12 col-md-6">
+                            <div id="map" class="map"></div>
+                        </div>
+                    </div>
+                    <!-- maps to display near and far restaurant  -->
+                    <!-- row start -->
+                    <div class="row mt-5" id="sub-heading" style="display: none;">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-2">
+                                <h5>Location of Nearest Restaurant (Drive/Walk)</h5>
+                            </div>
+                            <div id="map2" class="map"></div>
+                            <div id='routeInfoPanel'></div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mb-2">
+                                <h5>Location of Farthest Restaurant (Drive/Walk)</h5>
+                            </div>
+
+                            <div id="map3" class="map"></div>
+                            <div id='routeInfoPanel2'></div>
+                        </div>
+                    </div>
+                    <!-- row end -->
+                </div>
+                <!-- Task 1 Tab -->
+                <div id="task1" role="tabpanel" class="tab-pane fade">
+                    <!-- row start -->
+                    <div class="row">
+                        <div class="col-12 col-md-2 justify-content-start">
+                            <h3 class="display-4">Task 1</h3>
+                        </div>
+                        <hr class="my-4">
+                    </div>
+                    <!-- row ends -->
+
+                    <p class="mt-3 font-weight-bold">1) Area of Triangle whose edges are joining three points A,B and C
+                    </p>
+                    <p class="mt-3">The Polygon connecting three point where</p>
+                    <ul>
+                        <li>A : Your Location</li>
+                        <li>B : Nearest Restaurant Location</li>
+                        <li>C : Farthest Restaurant Location</li>
+                    </ul>
+                    <!-- Polygon on map -->
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-12 col-md-6">
+                            <div id="trimap" class="map"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 col-md-4">
+                            <h5 class="display-4">Calculations : </h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <!-- Unordered list -->
+                        <ul class="list-unstyled ml-5">
+                            <li class="lead">Length of straight line joining A and B <strong>a = <span id="AtoB"></span>
+                                    Kms.</strong></li>
+                            <li class="lead">Length of straight line joining B and C <strong>b = <span id="BtoC"></span>
+                                    Kms.</strong></li>
+
+                            <li class="lead">Length of straight line joining A and C <strong>c = <span id="AtoC"></span>
+                                    Kms.</strong></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="card card-body mt-5">
+                        <div class="col-12 col-md-8 offset-md-2">
+                            <img src="https://www.w3resource.com/w3r_images/area-of-a-triangle.png"
+                                style="max-width: 100%; height:auto;">
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="card card-body" style="border-color: green; border-style: solid;">
+                                <p class="text-center"><span class="font-weight-light font-italic">Semi Perimeter =
+                                    </span><span id="perimeter" class="font-weight-bold"></span> Kms.</p>
+                                <p class="text-center"><span class="font-weight-light font-italic">Area of Triangle =
+                                    </span><span id="area" class="font-weight-bold"></span> Kms<sup>2</sup>.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="mt-5 font-weight-bold">2)Time taken to walk the above triangle, if standard walk speed is
+                        5.0 kmph
+                    </p>
+
+                    <p class="ml-5">Total Distance = <span id="distance1"></span> Kms.</p>
+
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="card card-body" style="border-color: green; border-style: solid;">
+                                <p class="text-center"><span class="font-weight-light font-italic">Time =
+                                    </span><span id="timeinmins" class="font-weight-bold"></span></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="task2" role="tabpanel" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-12 col-md-2 justify-content-start">
+                            <h3 class="display-4">Task 2</h3>
+                        </div>
+                        <hr class="my-4">
+                    </div>
+
+
+                    <p class="mt-3">The Polygon connecting three point where</p>
+                    <ul>
+                        <li><strong>Map 1 </strong> shows Distance from Your location to Nearest Restaurant Locationn
+                        </li>
+                        <li><strong>Map 2 </strong> shows Distance from Nearest Restaurant Location to Farthest
+                            Restaurant Location</li>
+
+                        <li><strong>Map 3 </strong> shows Distance from Farthest Restaurant Location to Your Location
+                        </li>
+
+                    </ul>
+                    <div class="row justify-content-center mt-5">
+
+                        <div class="col-12 col-md-4">
+                            <div class="mb-5">
+                                <h5>Map 1</h5>
+                            </div>
+                            <div id="drivingmap1" style="height: 150px; width : 250px;"></div>
+
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="mb-5">
+                                <h5>Map 2</h5>
+                            </div>
+                            <div id="drivingmap3" style="height: 150px; width : 250px;"></div>
+
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-5">
+                                <h5>Map 3</h5>
+                            </div>
+                            <div id="drivingmap2" style="height: 150px; width : 250px;"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 col-md-4">
+                            <h5 class="display-4">Calculations : </h5>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <ul class="list-unstyled ml-5">
+                            <li class="lead">Driving Distance between the points in Map 1 <strong>a = <span
+                                        id="routeInfo1"></span>
+                                    Kms.</strong></li>
+                            <li class="lead">Driving Distance between the points in Map 2 <strong>b = <span
+                                        id="routeInfo3"></span>
+                                    Kms.</strong></li>
+
+                            <li class="lead">Driving Distance between the points in Map 3 <strong>c = <span
+                                        id="routeInfo2"></span>
+                                    Kms.</strong></li>
+
+                        </ul>
+                    </div>
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="card card-body" style="border-color: green; border-style: solid;">
+                                <p class="text-center"><span class="font-weight-light font-italic">Semi Perimeter =
+                                    </span><span id="perimeter2" class="font-weight-bold"></span> Kms.</p>
+                                <p class="text-center"><span class="font-weight-light font-italic">Area of Triangle =
+                                    </span><span id="area2" class="font-weight-bold"></span> Kms<sup>2</sup>.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="mt-5 font-weight-bold">2)Time taken to walk the above triangle, if standard walk speed is
+                        5.0 kmph
+                    </p>
+                    <p class="ml-5">Total Distance = <span id="distance2"></span> Kms.</p>
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="card card-body" style="border-color: green; border-style: solid;">
+                                <p class="text-center"><span class="font-weight-light font-italic">Time =
+                                    </span><span id="timeinmins2" class="font-weight-bold"></span></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <!-- <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+    <!-- Bing Maps scripts. -->
+    <script type='text/javascript' src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>
+    <!-- Script -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
