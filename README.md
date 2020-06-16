@@ -28,3 +28,26 @@ $ npm install
 const BING_API_KEY = 'paste Your Bing API Key here';
 const ZOMATO_API_KEY = 'pate Your Zomato API key here';
 ```
+
+### Usage
+
+- After Installing NPM Pakages, start npm to initialize the server
+
+> command to run
+
+```shell
+$ npm start
+
+```
+- The application will open in new window.
+
+## Documentation
+
+- The application opens the problem statement page.
+- Click on the button View Solution, Navigates to Solution Page.
+- In solution page, By default Map will show your current location.
+- To search for restaurants near you click on `Search for restaurants near me` button.
+- In Map, 10 restaurant locations will show 
+ 
+
+
