@@ -46,8 +46,11 @@ $ npm start
 - The application opens the problem statement page.
 - Click on the button View Solution, Navigates to Solution Page.
 - In solution page, By default Map will show your current location.
+- Initially Task 1, Task 2 Tabs and Get Near and Far Restaurants in Map (drive/walk) buttons are disabled
+- When user click on search for Restaurant Near me then these buttons and Tabs will enable
 - To search for restaurants near you click on `Search for restaurants near me` button.
-- In Map, 10 restaurant locations will show 
+- In Map, 10 restaurant locations will show.
+
 
 
 
