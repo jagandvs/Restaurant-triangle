@@ -21,7 +21,7 @@ $ npm install
 ```
 ### API_KEYS
 
-- Get <a href="https://developers.zomato.com/api#headline2" target="_blank">ZOMATO_API_KEY</a> & <a href="https://docs.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key" target="_blank">BING_API_KEY</a> and paste both the keys in config.js
+- Get <a href="https://developers.zomato.com/api#headline2" target="_blank">ZOMATO_API_KEY</a> & <a href="https://docs.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key" target="_blank">BING_API_KEY</a> and paste both the keys in `js/config.js`
 
 ```javascript
 // code away!
@@ -48,6 +48,6 @@ $ npm start
 - In solution page, By default Map will show your current location.
 - To search for restaurants near you click on `Search for restaurants near me` button.
 - In Map, 10 restaurant locations will show 
- 
+
 
 
