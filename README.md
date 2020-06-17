@@ -44,6 +44,7 @@ $ npm start
 ## Documentation
 
 - The application opens the problem statement page.
+- Give Permission and allow GPS for location access to get current location.
 - Click on the button View Solution, Navigates to Solution Page.
 - In solution page, By default Map will show your current location.
 - Initially Task 1, Task 2 Tabs and Get Near and Far Restaurants in Map (drive/walk) buttons are disabled
