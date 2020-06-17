@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- API Key Configurations -->
     <script src="js/config.js"></script>
-
 </head>
 
 <body>
@@ -24,15 +23,12 @@
             <p class="lead">Solution</p>
         </div>
     </div>
-
-
     <div class="container">
         <div class="row mt-2 mb-2">
             <div class="col-12 col-md-2">
                 <!-- button to navigate to previous page -->
                 <a class="btn btn-primary text-white" href="index.html"><i class="fa fa-chevron-circle-left"
-                        aria-hidden="true"></i> Go
-                    Back</a>
+                        aria-hidden="true"></i> Go Back</a>
             </div>
             <div class="col-12 col-md-10">
                 <div class="alert alert-info">
@@ -42,7 +38,6 @@
                         your location.</p>
                 </div>
             </div>
-
         </div>
         <!-- Card -->
         <div class="card card-body mb-5">
@@ -58,7 +53,6 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#task2" role="tab" onclick="task2()" data-toggle="tab">Task 2</a>
                 </li>
-
             </ul>
             <!-- Tab Content -->
             <div class="tab-content">
@@ -105,7 +99,6 @@
                             <div class="mb-2">
                                 <h5>Location of Farthest Restaurant (Drive/Walk)</h5>
                             </div>
-
                             <div id="map3" class="map"></div>
                             <div id='routeInfoPanel2'></div>
                         </div>
@@ -122,7 +115,6 @@
                         <hr class="my-4">
                     </div>
                     <!-- row ends -->
-
                     <p class="mt-3 font-weight-bold">1) Area of Triangle whose edges are joining three points A,B and C
                     </p>
                     <p class="mt-3">The Polygon connecting three point where</p>
@@ -142,7 +134,6 @@
                             <h5 class="display-4">Calculations : </h5>
                         </div>
                     </div>
-
                     <div class="row mt-5">
                         <!-- Unordered list -->
                         <ul class="list-unstyled ml-5">
@@ -156,15 +147,12 @@
 
                         </ul>
                     </div>
-
                     <div class="card card-body mt-5">
                         <div class="col-12 col-md-8 offset-md-2">
                             <img src="https://www.w3resource.com/w3r_images/area-of-a-triangle.png"
                                 style="max-width: 100%; height:auto;">
                         </div>
-
                     </div>
-
                     <div class="row mt-5 justify-content-center">
                         <div class="col-12 col-md-6">
                             <div class="card card-body" style="border-color: green; border-style: solid;">
@@ -174,14 +162,11 @@
                                     </span><span id="area" class="font-weight-bold"></span> Kms<sup>2</sup>.</p>
                             </div>
                         </div>
-
                     </div>
                     <p class="mt-5 font-weight-bold">2)Time taken to walk the above triangle, if standard walk speed is
                         5.0 kmph
                     </p>
-
                     <p class="ml-5">Total Distance = <span id="distance1"></span> Kms.</p>
-
                     <div class="row mt-5 justify-content-center">
                         <div class="col-12 col-md-6">
                             <div class="card card-body" style="border-color: green; border-style: solid;">
@@ -189,10 +174,8 @@
                                     </span><span id="timeinmins" class="font-weight-bold"></span></p>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div id="task2" role="tabpanel" class="tab-pane fade">
                     <div class="row">
                         <div class="col-12 col-md-2 justify-content-start">
@@ -200,8 +183,6 @@
                         </div>
                         <hr class="my-4">
                     </div>
-
-
                     <p class="mt-3">The Polygon connecting three point where</p>
                     <ul>
                         <li><strong>Map 1 </strong> shows Distance from Your location to Nearest Restaurant Locationn
@@ -211,40 +192,31 @@
 
                         <li><strong>Map 3 </strong> shows Distance from Farthest Restaurant Location to Your Location
                         </li>
-
                     </ul>
                     <div class="row justify-content-center mt-5">
-
                         <div class="col-12 col-md-4">
                             <div class="mb-5">
                                 <h5>Map 1</h5>
                             </div>
                             <div id="drivingmap1" style="height: 150px; width : 250px;"></div>
-
                         </div>
-
                         <div class="col-12 col-md-4">
                             <div class="mb-5">
                                 <h5>Map 2</h5>
                             </div>
                             <div id="drivingmap3" style="height: 150px; width : 250px;"></div>
-
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-5">
                                 <h5>Map 3</h5>
                             </div>
                             <div id="drivingmap2" style="height: 150px; width : 250px;"></div>
-
                         </div>
-
                     </div>
                     <div class="row mt-5">
                         <div class="col-12 col-md-4">
                             <h5 class="display-4">Calculations : </h5>
                         </div>
-
-
                     </div>
                     <div class="row">
                         <ul class="list-unstyled ml-5">
@@ -254,11 +226,9 @@
                             <li class="lead">Driving Distance between the points in Map 2 <strong>b = <span
                                         id="routeInfo3"></span>
                                     Kms.</strong></li>
-
                             <li class="lead">Driving Distance between the points in Map 3 <strong>c = <span
                                         id="routeInfo2"></span>
                                     Kms.</strong></li>
-
                         </ul>
                     </div>
                     <div class="row mt-5 justify-content-center">
@@ -270,7 +240,6 @@
                                     </span><span id="area2" class="font-weight-bold"></span> Kms<sup>2</sup>.</p>
                             </div>
                         </div>
-
                     </div>
                     <p class="mt-5 font-weight-bold">2)Time taken to walk the above triangle, if standard walk speed is
                         5.0 kmph
@@ -283,27 +252,15 @@
                                     </span><span id="timeinmins2" class="font-weight-bold"></span></p>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-
-
-
-
-
-    <!-- <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Bing Maps scripts. -->
     <script type='text/javascript' src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>

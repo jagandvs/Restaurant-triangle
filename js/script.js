@@ -4,12 +4,9 @@ var locationDistances = []
 
 // Function to get Map onto the webpage
 function GetMap() {
-
     map = new Microsoft.Maps.Map(document.getElementById('map'), {
         credentials: BING_API_KEY
     });
-
-
 
     //Request the user's location
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -25,24 +22,16 @@ function GetMap() {
         map.entities.push(pin);
 
         //Center the map on the user's location.
-
         map.setView({ center: loc, zoom: 15 });
     });
-
-
 }
 
 //Function to get the restaurants near user location
-
 function getRestaurantsNearMe() {
 
     //remove disable class after finding restaurants
-
     document.getElementById("getNearFarRestBtn").disabled = false;
-
     document.getElementById("getNearFarRestBtnWalk").disabled = false;
-
-
     $('.nav-tabs li a[href="#task1"]').removeClass('disabled');
     $('.nav-tabs li a[href="#task2"]').removeClass('disabled');
 
@@ -51,7 +40,6 @@ function getRestaurantsNearMe() {
     json_obj = JSON.parse(Get(url));
     var count = 1;
     json_obj.restaurants.forEach((restaurant, index) => {
-
         var center1 = new Microsoft.Maps.Location(restaurant.restaurant.location.latitude, restaurant.restaurant.location.longitude);
         infobox = new Microsoft.Maps.Infobox(center1, {
             visible: false
@@ -74,25 +62,18 @@ function getRestaurantsNearMe() {
         //Add the pushpin to the map
         map.entities.push(pin);
         count++;
-
     });
-
     map.setView({ center: loc, zoom: 15 });
-
     getDrivingDistances();
 }
-
 
 function getDrivingDistances() {
     var distances = [];
     var distancesArr = [];
-
     for (let json in json_obj.restaurants) {
-
         // url simple distance matrix between a set of origins and destinations
         let url = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + loc.latitude + "," + loc.longitude + "&destinations=" + json_obj.restaurants[json].restaurant.location.latitude + "," + json_obj.restaurants[json].restaurant.location.longitude + "&travelMode=driving&key=" + BING_API_KEY;
         locationDistances = JSON.parse(Get(url));
-
         distances.push(locationDistances.resourceSets[0].resources[0].results[0].travelDistance);
         distancesArr.push({ 'key': json, 'val': locationDistances.resourceSets[0].resources[0].results[0].travelDistance })
     }
@@ -108,12 +89,7 @@ function getDrivingDistances() {
             order2 = distancesArr[i].key;
         }
     }
-
-
-
 }
-
-
 
 function pushpinClicked(e) {
     //Make sure the infobox has metadata to display.
@@ -127,6 +103,7 @@ function pushpinClicked(e) {
         });
     }
 }
+
 // function to call nearest and farthest restaurants on functions , travel mode Driving
 function getNearAndFarRest() {
     var z = document.getElementById("sub-heading");
@@ -136,6 +113,7 @@ function getNearAndFarRest() {
     shortDistanceMap();
     farDistanceMap();
 }
+
 // function to call nearest and farthest restaurants on functions , travel mode walking
 function getNearAndFarRestWalk() {
     var z = document.getElementById("sub-heading");
@@ -148,9 +126,7 @@ function getNearAndFarRestWalk() {
 }
 // function to show nearest restaurant on Map , travel mode Walk
 function shortDistanceMapWalk() {
-
     var map2 = new Microsoft.Maps.Map(document.getElementById('map2'), {});
-
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
@@ -174,20 +150,15 @@ function shortDistanceMapWalk() {
         //Calculate directions.
         directionsManager.calculateDirections();
     });
-
-
 }
 
 // function to show farthest restaurant on Map , travel mode Walk
 function farDistanceMapWalk() {
-
     map3 = new Microsoft.Maps.Map(document.getElementById('map3'), {});
-
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
         directionsManager2 = new Microsoft.Maps.Directions.DirectionsManager(map3);
-
         directionsManager2.setRequestOptions({
             routeMode: Microsoft.Maps.Directions.RouteMode.walking
         });
@@ -199,27 +170,21 @@ function farDistanceMapWalk() {
         var workWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: json_obj.restaurants[order2].restaurant.name, location: new Microsoft.Maps.Location(json_obj.restaurants[order2].restaurant.location.latitude, json_obj.restaurants[order2].restaurant.location.longitude) });
         directionsManager2.addWaypoint(workWaypoint);
 
-
         //Add event handlers to directions manager.
         Microsoft.Maps.Events.addHandler(directionsManager2, 'directionsError', directionsError2);
         Microsoft.Maps.Events.addHandler(directionsManager2, 'directionsUpdated', directionsUpdated2);
         //Calculate directions.
         directionsManager2.calculateDirections();
     });
-
-
 }
 
 // function to show nearest restaurant on Map , travel mode drive
 function shortDistanceMap() {
-
     var map2 = new Microsoft.Maps.Map(document.getElementById('map2'), {});
-
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
         directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map2);
-
         directionsManager.setRequestOptions({
             routeMode: Microsoft.Maps.Directions.RouteMode.driving
         });
@@ -231,22 +196,17 @@ function shortDistanceMap() {
         var workWaypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: json_obj.restaurants[order1].restaurant.name, location: new Microsoft.Maps.Location(json_obj.restaurants[order1].restaurant.location.latitude, json_obj.restaurants[order1].restaurant.location.longitude) });
         directionsManager.addWaypoint(workWaypoint1);
 
-
         //Add event handlers to directions manager.
         Microsoft.Maps.Events.addHandler(directionsManager, 'directionsError', directionsError);
         Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', directionsUpdated);
         //Calculate directions.
         directionsManager.calculateDirections();
     });
-
-
 }
 
 // function to show farthest restaurant on Map , travel mode driving
 function farDistanceMap() {
-
     map3 = new Microsoft.Maps.Map(document.getElementById('map3'), {});
-
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
@@ -269,9 +229,8 @@ function farDistanceMap() {
         //Calculate directions.
         directionsManager2.calculateDirections();
     });
-
-
 }
+
 //event to update directions on map
 function directionsUpdated(e) {
     //Get the current route index.
@@ -321,7 +280,6 @@ function directionsUpdated2(e) {
 
     //innerHTML to show the distance
     document.getElementById('routeInfoPanel2').innerHTML = 'Distance: ' + distance2 + ' ' + distanceUnits2;
-
 }
 
 //to display route error in directions 
@@ -340,8 +298,6 @@ function task1() {
     var point1 = new Microsoft.Maps.Location(json_obj.restaurants[order1].restaurant.location.latitude, json_obj.restaurants[order1].restaurant.location.longitude);
     //coordinates of Farthest restaurant
     var point2 = new Microsoft.Maps.Location(json_obj.restaurants[order2].restaurant.location.latitude, json_obj.restaurants[order2].restaurant.location.longitude);
-
-
 
     //Create array of locations to form a ring.
     var exteriorRing = [
@@ -430,19 +386,16 @@ function task1() {
         document.getElementById('distance1').innerHTML = distance.toFixed(2);
         document.getElementById('timeinmins').innerHTML = hours + "<span> Hr</span> :" + ~~minutes + " <span> Mins</span>";
     });
-
 }
 
 //Function to handle task 1
 function task2() {
-
     var map2 = new Microsoft.Maps.Map(document.getElementById('drivingmap1'), {});
 
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
         dirMan1 = new Microsoft.Maps.Directions.DirectionsManager(map2);
-
         dirMan1.setRequestOptions({
             routeMode: Microsoft.Maps.Directions.RouteMode.driving
         });
@@ -454,24 +407,17 @@ function task2() {
         var workWaypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: json_obj.restaurants[order1].restaurant.name, location: new Microsoft.Maps.Location(json_obj.restaurants[order1].restaurant.location.latitude, json_obj.restaurants[order1].restaurant.location.longitude) });
         dirMan1.addWaypoint(workWaypoint1);
 
-
         //Add event handlers to directions manager.
         Microsoft.Maps.Events.addHandler(dirMan1, 'directionsError', directionsError3);
         Microsoft.Maps.Events.addHandler(dirMan1, 'directionsUpdated', directionsUpdated3);
         //Calculate directions.
         dirMan1.calculateDirections();
-
-
     });
-
-
     var map3 = new Microsoft.Maps.Map(document.getElementById('drivingmap2'), {});
-
     //Load the directions module.
     Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
         //Create an instance of the directions manager.
         dirMan2 = new Microsoft.Maps.Directions.DirectionsManager(map3);
-
         dirMan2.setRequestOptions({
             routeMode: Microsoft.Maps.Directions.RouteMode.driving
         });
@@ -489,7 +435,6 @@ function task2() {
         //Calculate directions.
         dirMan2.calculateDirections();
     });
-
     var map4 = new Microsoft.Maps.Map(document.getElementById('drivingmap3'), {});
 
     //Load the directions module.
@@ -551,9 +496,6 @@ function task2() {
 
     document.getElementById('distance2').innerHTML = distance.toFixed(2);
     document.getElementById('timeinmins2').innerHTML = hours + "<span> Hr</span> :" + ~~minutes + " <span> Mins</span>";
-
-
-
 }
 
 //event to update directions on map
@@ -607,7 +549,6 @@ function directionsUpdated4(e) {
     //Time is in seconds, convert to minutes and round off.
     var time2 = Math.round(e.routeSummary[routeIdx].timeWithTraffic / 60);
     document.getElementById('routeInfo2').innerHTML = distance2;
-
 }
 
 function directionsError4(e) {
@@ -636,7 +577,6 @@ function directionsUpdated5(e) {
     //Time is in seconds, convert to minutes and round off.
     var time2 = Math.round(e.routeSummary[routeIdx].timeWithTraffic / 60);
     document.getElementById('routeInfo3').innerHTML = distance2;
-
 }
 
 function directionsError5(e) {
@@ -645,11 +585,9 @@ function directionsError5(e) {
 
 //calculate area using Heron's formula 
 function calcAreaofTriangle(A, B, C) {
-
     var s = (A + B + C) / 2;
     var area = Math.sqrt(s * ((s - A) * (s - B) * (s - C)));
     return area.toFixed(2);
-
 }
 
 //calculate time taken
@@ -664,9 +602,9 @@ function addSides(A, B, C) {
     return s;
 }
 
-//function to perfom http calls
+//function to perfom http Get Request and return response. 
 function Get(yourUrl) {
-    var Httpreq = new XMLHttpRequest(); // a new request
+    var Httpreq = new XMLHttpRequest();
     Httpreq.open("GET", yourUrl, false);
     Httpreq.send(null);
     return Httpreq.responseText;
